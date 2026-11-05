@@ -12,6 +12,17 @@ from pydantic import BaseModel
 
 ROOT = Path(__file__).resolve().parent
 app = FastAPI(title="ChurnPredict AI - Real TensorFlow Inference")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "https://fascinating-lebkuchen-4ff629.netlify.app",
+    ],
+    allow_credentials=False,
+    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_headers=["*"],
+)
 origins = [x.strip() for x in os.getenv("ALLOWED_ORIGINS", "https://fascinating-lebkuchen-4ff629.netlify.app").split(",") if x.strip()]
 app.add_middleware(CORSMiddleware, allow_origins=origins, allow_methods=["GET", "POST"], allow_headers=["Content-Type"])
 
