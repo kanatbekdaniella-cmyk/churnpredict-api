@@ -23,8 +23,6 @@ app.add_middleware(
     allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
 )
-origins = [x.strip() for x in os.getenv("ALLOWED_ORIGINS", "https://fascinating-lebkuchen-4ff629.netlify.app").split(",") if x.strip()]
-app.add_middleware(CORSMiddleware, allow_origins=origins, allow_methods=["GET", "POST"], allow_headers=["Content-Type"])
 
 @lru_cache(maxsize=1)
 def artifacts():
